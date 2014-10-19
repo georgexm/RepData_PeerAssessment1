@@ -135,6 +135,23 @@ dataC$V4<-as.factor(dataC$V4)
 
 # Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). The plot should look something like the following, which was creating using simulated data:
 
+dataWE<-dataC[dataC$V4=="weekend",]
+dataWD<-dataC[dataC$V4=="weekday",]
+
+idataWE <- split(dataWE$steps, dataWE$interval)
+idata1WE <- sapply(idataWE, mean)
+
+idataWD <- split(dataWD$steps, dataWD$interval)
+idata1WD <- sapply(idataWD, mean)
+
+par (mfrow=c(2,1))
+
+plot(idata1WD, xaxt="n", type="l", xlab="5-minute interval", ylab="Average number of steps taken", main="Average weekday activity pattern")
+axis(1, at=1:288, labels=names(idata1))
+
+plot(idata1WE, xaxt="n", type="l", xlab="5-minute interval", ylab="Average number of steps taken", main="Average weekend activity pattern")
+axis(1, at=1:288, labels=names(idata1))
+
 
 
 ```
